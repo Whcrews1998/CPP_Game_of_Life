@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Cell.h"
 #include <iostream>
 
 Game::Game() {
@@ -25,7 +26,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer) {
-            SDL_SetRenderDrawColor(renderer, 255,255,255,255);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             std::cout << "Render created successfully!" << std::endl;
         } else 
             std::cout << "Failed to create renderer" << std::endl;
@@ -52,11 +53,20 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+
     return;
 }
 
 void Game::render() {
+    Cell newCell(50, 50, 32, 32);
+    // Set Background Color
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
+    // Draw Cell
+    newCell.render(renderer);
+    // Present
+    SDL_RenderPresent(renderer);
+
 
     return;
 }
