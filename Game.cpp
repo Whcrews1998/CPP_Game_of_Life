@@ -9,14 +9,14 @@ Game::~Game() {
     return;
 }
 
-void gameInit(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
+void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
     int flag = 0;
     if (fullscreen) 
         flag = SDL_WINDOW_FULLSCREEN;
 
     if (SDL_Init(SDL_INIT_EVERYTHING)  == 0) {
         std::cout << "SDL Initialized!" << std::endl;
-        window = SDL_CreateWindow(title, xpos, ypos, width, height, )
+        window = SDL_CreateWindow(title, xpos, ypos, width, height, flag);
 
         if (window) 
             std::cout << "Window created successfully" << std::endl;
@@ -24,10 +24,10 @@ void gameInit(const char* title, int xpos, int ypos, int width, int height, bool
             std::cout << "Faield to create window" << std::endl;
         
         renderer = SDL_CreateRenderer(window, -1, 0);
-        if (renderer) 
+        if (renderer) {
             SDL_SetRenderDrawColor(renderer, 255,255,255,255);
             std::cout << "Render created successfully!" << std::endl;
-        else 
+        } else 
             std::cout << "Failed to create renderer" << std::endl;
 
         isRunning = true;
@@ -44,7 +44,7 @@ void Game::handleEvents() {
         case SDL_QUIT:
             isRunning = false;
             break;
-        default;
+        default:
             break;
     }
 
