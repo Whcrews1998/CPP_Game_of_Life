@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Cell.h"
+#include "Config.h"
 #include <iostream>
 
 Game::Game() {
@@ -10,7 +11,11 @@ Game::~Game() {
     return;
 }
 
-void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
+void Game::init(const char* title, int xpos, int ypos, bool fullscreen) {
+
+    int width = CELL_SIZE * CELL_COLUMN_SIZE;
+    int height = CELL_SIZE * CELL_ROW_SIZE;
+
     int flag = 0;
     if (fullscreen) 
         flag = SDL_WINDOW_FULLSCREEN;
@@ -35,6 +40,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     } else {
         isRunning = false;
     }
+
+    board.init(CELL_COLUMN_SIZE, CELL_ROW_SIZE);
 }
 
 void Game::handleEvents() {
@@ -58,12 +65,14 @@ void Game::update() {
 }
 
 void Game::render() {
-    Cell newCell(50, 50, 32, 32);
+    
     // Set Background Color
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, BLACK, BLACK, BLACK, 255);
     SDL_RenderClear(renderer);
+
     // Draw Cell
-    newCell.render(renderer);
+    board.render(renderer);
+
     // Present
     SDL_RenderPresent(renderer);
 
