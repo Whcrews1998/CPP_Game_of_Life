@@ -9,8 +9,8 @@ SDL-IMAGE-F=-F/Library/Frameworks -framework SDL2_image
 
 all: Game-of-Life
 	
-Game-of-Life: main.o Game.o Cell.o
-	$(CC) -o Game-of-Life main.o Game.o Cell.o $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
+Game-of-Life: main.o Game.o Cell.o Game-Board.o
+	$(CC) -o Game-of-Life main.o Game.o game-Board.o Cell.o $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
@@ -18,7 +18,14 @@ main.o: main.cpp
 Game.o: Game.cpp
 	$(CC) $(CFLAGS) Game.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
 
+Game-Board.o: Game-Board.cpp
+	$(CC) $(CFLAGS) Game-Board.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
 Cell.o: Cell.cpp
 	$(CC) $(CFLAGS) Cell.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
+
+Config: 
+	make clean
+	make
+	
 clean: 
 	rm -rf *o Game-of-Life
