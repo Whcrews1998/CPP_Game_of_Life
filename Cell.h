@@ -5,7 +5,8 @@
 class Cell {
 
     public:
-        Cell(const int x, const int y, const int w, const int h);
+        Cell();
+        void init(const int x, const int y);
         void setState(bool val);
         void render(SDL_Renderer* renderer);
 
