@@ -60,7 +60,7 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-
+    board.update();
     return;
 }
 
