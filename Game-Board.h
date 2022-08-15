@@ -13,6 +13,8 @@ class GameBoard {
         int width;
         int height;
         Cell** board;
+
+        int getNeighborCount(int x, int y);
 };
 
 #endif
