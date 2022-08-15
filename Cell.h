@@ -7,12 +7,15 @@ class Cell {
     public:
         Cell();
         void init(const int x, const int y);
-        void setState(bool val);
         void render(SDL_Renderer* renderer);
 
+        void setState(bool val);
+        bool getState() {return isAlive;};
+
+        SDL_Rect rect;
     private:
         bool isAlive;
-        SDL_Rect rect;
+        
 };
 
 #endif
