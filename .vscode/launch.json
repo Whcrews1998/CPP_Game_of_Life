@@ -1,0 +1,10 @@
+{
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug C++",   
+            "additionalSOLibSearchPath": "/Library/Frameworks/SDL2.framework/Headers"
+        },
+    ]
+}

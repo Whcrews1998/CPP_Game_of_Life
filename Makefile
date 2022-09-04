@@ -1,31 +1,34 @@
 CC=g++
 CFLAGS=-c -Wall
 
-SDL-I=-I/Library/Frameworks/SDL2.framework/Headers
-SDL-IMAGE-I=-I/Library/Frameworks/SDL2_image.framework/Headers
+SDL-I=-I./frameworks/SDL2.framework/Headers
+SDL-F=-F./frameworks -framework SDL2
 
-SDL-F=-F/Library/Frameworks -framework SDL2
-SDL-IMAGE-F=-F/Library/Frameworks -framework SDL2_image
+SDL-IMAGE-I=-I./frameworks/SDL2_image.framework/Headers
+SDL-IMAGE-F=-F./frameworks -framework SDL2_image
 
 all: Game-of-Life
 	
-Game-of-Life: main.o Game.o Cell.o Game-Board.o
-	$(CC) -o Game-of-Life main.o Game.o game-Board.o Cell.o $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
+Game-of-Life: main.o Game.o Cell.o Game-Board.o move
+	$(CC) -o Game-of-Life ./obj/main.o ./obj/Game.o ./obj/game-Board.o ./obj/Cell.o $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
+main.o: ./src/main.cpp
+	$(CC) $(CFLAGS) ./src/main.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
 
-Game.o: Game.cpp
-	$(CC) $(CFLAGS) Game.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
+Game.o: ./src/Game.cpp
+	$(CC) $(CFLAGS) ./src/Game.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
 
-Game-Board.o: Game-Board.cpp
-	$(CC) $(CFLAGS) Game-Board.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
-Cell.o: Cell.cpp
-	$(CC) $(CFLAGS) Cell.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
+Game-Board.o: ./src/Game-Board.cpp
+	$(CC) $(CFLAGS) ./src/Game-Board.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
+Cell.o: ./src/Cell.cpp
+	$(CC) $(CFLAGS) ./src/Cell.cpp $(SDL-I) $(SDL-F) $(SDL-IMAGE-I) $(SDL-IMAGE-F)
 
 Config: 
 	make clean
 	make
-	
+
+move:
+	mv *.o ./obj
+
 clean: 
-	rm -rf *o Game-of-Life
+	rm -rf ./obj/*o Game-of-Life
